@@ -815,3 +815,78 @@ setInterval(() => {
 </script>
 </body>
 </html>
+
+<?php
+$dataFile = '../dashboard/data/image.json';
+$data = file_exists($dataFile) ? json_decode(file_get_contents($dataFile), true) : [];
+$image = $data['profil']['image'] ?? '../assets/default.jpg';
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-TOOLS SOSMED - Pengumuman Penutupan</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&family=Tilt+Neon&display=swap" rel="stylesheet"> 
+  <style>
+    body { font-family: 'Tilt Neon', sans-serif; }
+    .fade-in { opacity:0; transform:translateY(20px); transition:all .8s ease-in-out; }
+    .fade-in.show { opacity:1; transform:translateY(0); }
+    .animate-bounce-slow { animation: bounce 3s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+  </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+
+<nav class="fixed z-50 top-0 left-0 right-0 flex items-center justify-between 
+            backdrop-blur-md bg-gray-900/80 border border-gray-700 
+            p-3 mx-auto rounded-2xl shadow-xl fade-in transition-all duration-500" 
+     style="margin: 8px;">
+  <div class="flex items-center flex-shrink-0 text-white">
+    <a href="#" class="ml-4 text-2xl font-extrabold text-white bg-gradient-to-r from-red-600 to-rose-500 
+              px-5 py-2 rounded-2xl shadow-md flex items-center gap-3">
+      <i class="fas fa-triangle-exclamation text-yellow-300 text-2xl animate-pulse"></i>
+      <span class="tracking-wide">X-TOOLS SOSMED</span>
+    </a>
+  </div>
+</nav>
+
+<section class="flex items-center justify-center px-4 pt-28 pb-12 fade-in">
+  <div class="bg-gray-900 rounded-2xl p-8 max-w-2xl w-full text-center shadow-xl border border-red-600/40">
+    <img src="https://velixs.com/storage/web/logo.svg" alt="X-TOOLS Logo" 
+         class="mx-auto w-20 h-20 object-cover rounded-md animate-bounce-slow mb-4">
+    <h1 class="text-3xl font-bold bg-gradient-to-r from-red-500 via-rose-500 to-red-400">
+      PENGUMUMAN PENTING
+    </h1>
+    <p class="text-gray-300 mt-4 leading-relaxed">
+      Dengan berat hati kami sampaikan bahwa <span class="text-red-400 font-semibold">X-TOOLS SOSMED</span> 
+      resmi <span class="font-bold text-red-500">BERHENTI BEROPERASI</span> mulai hari ini karena 
+      mengalami kerugian yang tidak dapat ditanggung.
+    </p>
+    <div class="bg-gray-800 mt-6 p-4 rounded-lg shadow-lg text-left">
+      <h2 class="text-lg font-semibold text-red-400 mb-2">Informasi untuk Pengguna:</h2>
+      <ul class="list-disc list-inside text-gray-400 text-sm leading-relaxed space-y-1">
+        <li>Seluruh layanan suntik sosial media sudah <span class="text-red-400">dihentikan sementara</span>.</li>
+        <li>Pesanan yang belum diproses otomatis dibatalkan.</li>
+        <li>Bagi pengguna dengan saldo tersisa, silakan hubungi admin untuk konfirmasi lebih lanjut.</li>
+      </ul>
+    </div>
+</section>
+
+<footer class="bg-gray-900 text-center text-gray-500 py-4 text-sm border-t border-gray-700">
+  &copy; 2025 X-TOOLS SOSMED. Seluruh layanan telah dihentikan.
+</footer>
+
+<script>
+  // Animasi fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
