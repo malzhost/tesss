@@ -30,29 +30,27 @@
 </head>
 <body class="bg-slate-900 text-white min-h-screen p-4 pt-20" style="font-family: 'Tilt Neon', sans-serif;">
 
-<nav class="fixed z-50 top-0 left-0 right-0 flex flex-wrap items-center justify-between bg-gray-800 p-2 mx-auto rounded-lg shadow-lg" style="margin: 5px;">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <i class="icon-dashboard"></i>
-    <a href="#" class="ml-4 text-2xl font-bold bg bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-400  text-transparent bg-clip-text hover:text-white">DASHBOARD || TOOLS</a>
+  <nav class="fixed z-50 top-0 left-0 right-0 flex items-center justify-between 
+            backdrop-blur-md bg-gray-900/80 border border-gray-700 
+            p-3 mx-auto rounded-2xl shadow-xl transition-all duration-500" 
+     style="margin: 8px;">
+  <div class="flex items-center flex-shrink-0 text-white">
+    <a href="#" id="brand-text"
+       class="ml-4 text-2xl font-extrabold text-white bg-gradient-to-r from-indigo-600 to-blue-500 
+              hover:from-blue-600 hover:to-indigo-500 px-5 py-2 rounded-2xl shadow-md 
+              transition-all duration-300 flex items-center gap-3 hover:scale-105"
+       style="transform: rotate(-2deg); display: inline-block;">
+      <i class="fas fa-server text-cyan-300 text-2xl animate-pulse"></i>
+      <span id="brand-anim" class="tracking-wide">X-TOOLS ADMIN</span>
+    </a>
   </div>
-
-  <div class="block lg:hidden">
-    <button id="menu-toggle" class="px-4 py-2 border rounded-lg text-gray-200 border-gray-400 hover:text-white hover:border-white">
-      <i class="fas fa-bars"></i>
+  <div class="block lg:hidden mr-3">
+    <button id="menu-toggle" 
+            class="px-4 py-2 border rounded-xl text-gray-200 border-gray-500 
+                   bg-gray-800/70 hover:bg-gray-700 hover:border-gray-300 
+                   hover:text-white shadow-md transition-all duration-300 hover:scale-105">
+      <i class="fas fa-bars text-lg"></i>
     </button>
-  </div>
-
-  <div id="nav-menu" class="hidden w-full lg:flex lg:items-center lg:w-auto transition-all duration-300 ease-in-out">
-    <div class="text-sm lg:flex-grow">
-      <a href="/" class="block py-2 px-6 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white font-bold">⟩⟩ Home</a>
-      <a href="#pairing" class="block py-2 px-6 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white font-bold">⟩⟩ Pairing</a>
-    </div>
-    <div class="mt-2 lg:mt-0">
-      <a href="logout.php" class="inline-block px-6 py-2 rounded-full text-white bg-blue-500 hover:bg-blue-700 font-bold">
-      <i class="fas fa-sign-out-alt"></i>
-      LOGOUT
-      </a>
-    </div>
   </div>
 </nav>
 
@@ -68,7 +66,7 @@
      
   </h2>
   <p class="text-sm text-gray-400 mb-4">
-    Monitoring tools hosting untuk <span class="text-blue-400 font-semibold">tools cpanel</span>, <span class="text-green-400 font-semibold">respon otomatis</span>, atau <span class="text-yellow-400 font-semibold">edit password dan saldo</span>.
+    Monitoring tools sosmed untuk melihat <span class="text-blue-400 font-semibold">Transaksi user</span>, <span class="text-green-400 font-semibold">respon otomatis</span>, atau <span class="text-yellow-400 font-semibold">edit password dan saldo</span>.
   </p>
 
  <div class="grid grid-cols-1 gap-4">
@@ -80,6 +78,18 @@
       <div>
         <div id="total-bug" class="text-2xl font-bold">Loading...</div>
         <div>Total Order user</div>
+      </div>
+    </div>
+  </div>
+    <!-- Total Pendapatan -->
+  <div class="bg-[#ffe4cf] p-4 rounded-xl text-black flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="bg-white w-12 h-12 flex items-center justify-center rounded-xl text-orange-500 text-xl">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div>
+        <div id="total-pendapatan" class="text-2xl font-bold">Loading...</div>
+        <div>Total Pendapatan</div>
       </div>
     </div>
   </div>
@@ -119,21 +129,33 @@
 
 <div class="mt-10 bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">
   <h2 class="text-xl font-bold text-white mb-4">Daftar Pengguna</h2>
+
+  <div class="mb-4">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Cari username atau email..." 
+      class="w-full p-2 rounded-lg bg-gray-900 border border-gray-600 text-gray-200 focus:ring focus:ring-blue-500 focus:outline-none"
+      onkeyup="searchUsers()"
+    />
+  </div>
+
   <div class="overflow-x-auto">
     <table class="w-full min-w-[500px] text-sm text-left text-gray-300">
       <thead class="text-xs uppercase bg-gray-700 text-gray-400">
-      <tr>
-        <th class="px-4 py-2">#</th>
-        <th class="px-4 py-2">Username</th>
-        <th class="px-4 py-2">Password</th>
-        <th class="px-4 py-2">Email</th>
-        <th class="px-4 py-2">Verifikasi</th>
-        <th class="px-4 py-2">Saldo</th>
-        <th class="px-4 py-2">Aksi</th>
-      </tr>
-    </thead>
+        <tr>
+          <th class="px-4 py-2">#</th>
+          <th class="px-4 py-2">Username</th>
+          <th class="px-4 py-2">Password</th>
+          <th class="px-4 py-2">Email</th>
+          <th class="px-4 py-2">Verifikasi</th>
+          <th class="px-4 py-2">Saldo</th>
+          <th class="px-4 py-2">Trx</th>
+          <th class="px-4 py-2">Aksi</th>
+        </tr>
+      </thead>
       <tbody id="userTableBody" class="bg-gray-900 divide-y divide-gray-700">
-        <tr><td colspan="5" class="text-center py-4 text-gray-500">Memuat data...</td></tr>
+        <tr><td colspan="7" class="text-center py-4 text-gray-500">Memuat data...</td></tr>
       </tbody>
     </table>
   </div>
@@ -167,7 +189,6 @@
 <div class="mt-10 bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">  
   <h2 class="text-xl font-bold text-white mb-4">Riwayat Order User</h2>  
 
-  <!-- Scroll container -->
   <div class="overflow-x-auto">
     <div class="max-h-60 overflow-y-auto"> <!-- dipendekin -->
       <table class="w-full min-w-[1000px] text-sm text-left text-gray-300 whitespace-nowrap">  
@@ -187,6 +208,26 @@
         <tbody id="logsTableBody" class="bg-gray-900 divide-y divide-gray-700"></tbody>  
       </table>  
     </div>
+  </div>
+</div>
+<div class="mt-10 bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700 max-w-md mx-auto">
+  <h2 class="text-xl font-bold text-white mb-4">Atur Diskon Suntik</h2>
+  <div class="space-y-3">
+    <select id="kategoriSelect"
+      class="w-full px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none">
+      <option disabled selected value="">Pilih Kategori</option>
+    </select>
+
+    <input type="number" id="diskonInput" placeholder="Diskon (%)"
+      class="w-full px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none" />
+
+    <button onclick="aturDiskon()" class="w-full bg-blue-700 border hover:bg-purple-800 text-white font-bold py-2 px-4 rounded">
+     <i class="fa-solid fa-percent"></i> Simpan Diskon
+    </button>
+
+    <button onclick="resetDiskon()" class="w-full bg-red-600 border hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+     <i class="fa fa-refresh" aria-hidden="true"></i> Reset Semua Diskon
+    </button>
   </div>
 </div>
 <div class="mt-10 bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">  
@@ -218,7 +259,7 @@
   <!-- Gambar Preview - Klik untuk Pilih Gambar -->
   <label for="image" class="cursor-pointer inline-block">
     <img
-      src="/assets/default.jpg"
+      src="/assets/profile_1757670678.jpg"
       alt="Gambar Profil"
       class="w-32 h-32 object-cover rounded-md border-2 border-gray-500 shadow mx-auto hover:opacity-80 transition"
       id="previewImage"
@@ -250,20 +291,26 @@
 </div>
 <div class="mt-10 bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700 max-w-md mx-auto">
   <h2 class="text-2xl font-bold mb-6 text-center">Tambah Pengumuman</h2>
-
-  <form id="pengumumanForm">
+  <form id="pengumumanForm" class="space-y-4">
     <div>
-      <label class="block mb-2">Judul</label>
-      <input type="text" name="judul" class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" placeholder="Juduh contoh: Update TopUp" required>
+      <input type="text" name="judul" 
+        class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" 
+        placeholder="Judul contoh: Update TopUp" required>
     </div>
     <div>
-      <label class="block mb-2">Isi Pengumuman</label>
-      <textarea name="isi" rows="5" class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" placeholder="masukan informasi" required></textarea>
+      <textarea name="isi" rows="5" 
+        class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" 
+        placeholder="Masukan informasi" required></textarea>
     </div>
-    <button type="submit" class="w-full bg-purple-700 border hover:bg-purple-800 text-white font-bold py-2 px-4 rounded">Tambah</button>
+    <button type="submit" 
+      class="w-full bg-purple-700 border hover:bg-purple-800 text-white font-bold py-2 px-4 rounded">
+      Tambah
+    </button>
   </form>
 </div>
-
+<audio id="autoSound" autoplay hidden loop>
+  <source src="../assets/sound.mp3" type="audio/mpeg">
+</audio>
 <script>
 document.getElementById("pengumumanForm").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -298,6 +345,7 @@ document.getElementById("pengumumanForm").addEventListener("submit", function(e)
 </script>
  <script>
 let users = [];
+let filteredUsers = [];
 let currentPage = 1;
 const usersPerPage = 3;
 
@@ -305,10 +353,11 @@ fetch('data/data.php')
   .then(res => res.json())
   .then(data => {
     users = data.users || [];
+    filteredUsers = users;
     renderTable();
   })
   .catch(err => {
-    document.getElementById("userTableBody").innerHTML = `<tr><td colspan="5" class="text-center py-4 text-red-400">Gagal memuat data.</td></tr>`;
+    document.getElementById("userTableBody").innerHTML = `<tr><td colspan="7" class="text-center py-4 text-red-400">Gagal memuat data.</td></tr>`;
     console.error(err);
   });
 
@@ -316,42 +365,44 @@ function renderTable() {
   const tbody = document.getElementById("userTableBody");
   tbody.innerHTML = "";
 
-  if (users.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-400">Belum ada data pengguna.</td></tr>`;
+  if (filteredUsers.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">Tidak ada data pengguna.</td></tr>`;
     return;
   }
 
   const start = (currentPage - 1) * usersPerPage;
   const end = start + usersPerPage;
-  const pageUsers = users.slice(start, end);
+  const pageUsers = filteredUsers.slice(start, end);
 
   pageUsers.forEach((user, i) => {
-  tbody.innerHTML += `
-    <tr>
-      <td class="px-4 py-2">${start + i + 1}</td>
-      <td class="px-4 py-2 text-green-400 font-medium">${user.username}</td>
-      <td class="px-4 py-2 text-yellow-400 font-medium">${user.password}</td>
-      <td class="px-4 py-2 text-white font-medium">${user.email}</td>
-      <td class="px-4 py-2 text-white font-medium">${user.verified}</td>
-      <td class="px-4 py-2 text-white text-sm">Rp ${user.saldo?.toLocaleString("id-ID") || 0}</td>
-      <td class="px-4 py-2">
-        <button onclick="copyToClipboard('${user.password}')" class="text-blue-400 hover:text-blue-300 text-xs">
-          <i class="fas fa-copy"></i> Salin
-        </button>
+    const totalTrx = user.logs ? user.logs.length : 0;
+    tbody.innerHTML += `
+      <tr>
+        <td class="px-4 py-2">${start + i + 1}</td>
+        <td class="px-4 py-2 text-green-400 font-medium">${user.username}</td>
+        <td class="px-4 py-2 text-yellow-400 font-medium">${user.password}</td>
+        <td class="px-4 py-2 text-white font-medium">${user.email}</td>
+        <td class="px-4 py-2 text-white font-medium">${user.verified}</td>
+        <td class="px-4 py-2 text-white text-sm">Rp ${user.saldo?.toLocaleString("id-ID") || 0}</td>
+        <td class="px-4 py-2 text-purple-400 font-medium">${totalTrx}</td>
+        <td class="px-4 py-2">
+      <button onclick="blokirUser('${user.username}')" class="text-red-400 hover:text-red-300 text-xs">
+       <i class="fas fa-ban"></i> Blokir
+       </button>
       </td>
-    </tr>
-  `;
-});
+      </tr>
+    `;
+  });
 
-  const totalPages = Math.ceil(users.length / usersPerPage);
-  document.getElementById("pageInfo").textContent = `page ${currentPage} from ${totalPages}`;
-  
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+  document.getElementById("pageInfo").textContent = `Page ${currentPage} dari ${totalPages}`;
+
   document.getElementById("prevBtn").disabled = currentPage === 1;
   document.getElementById("nextBtn").disabled = currentPage === totalPages;
 }
 
 function nextPage() {
-  const totalPages = Math.ceil(users.length / usersPerPage);
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
   if (currentPage < totalPages) {
     currentPage++;
     renderTable();
@@ -365,20 +416,67 @@ function prevPage() {
   }
 }
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text)
-    .then(() => {
-      Swal.fire({
-        toast: true,
-        position: 'top-end',
-        icon: 'success',
-        title: 'Password disalin!',
-        showConfirmButton: false,
-        timer: 1500,
-        background: '#1e293b',
-        color: '#e2e8f0'
+function searchUsers() {
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  filteredUsers = users.filter(user => 
+    user.username.toLowerCase().includes(query) || 
+    user.email.toLowerCase().includes(query)
+  );
+  currentPage = 1;
+  renderTable();
+}
+
+function blokirUser(username) {
+  Swal.fire({
+    title: 'Yakin?',
+    text: `Kamu akan memblokir user ${username}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    confirmButtonText: 'Ya, blokir!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch('blokir.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ username })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: `User ${username} berhasil diblokir.`,
+            timer: 2000,
+            showConfirmButton: false
+          });
+
+          fetch('data/data.php')
+            .then(res => res.json())
+            .then(data => {
+              users = data.users || [];
+              filteredUsers = users;
+              renderTable();
+            });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: data.message || 'Gagal memblokir user.'
+          });
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Terjadi kesalahan server.'
+        });
       });
-    });
+    }
+  });
 }
 
   fetch('data/data.php')
@@ -471,7 +569,6 @@ fetch('data/data.php')
       }
     });
 
-    // Urutkan terbaru dulu
     logs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     renderTable1();
   })
@@ -581,7 +678,81 @@ document.getElementById("image").addEventListener("change", function () {
     Swal.fire("Error", err.message, "error");
   });
 });
+fetch('data/diskon.php')
+  .then(res => res.json())
+  .then(data => {
+    const select = document.getElementById("kategoriSelect");
+    Object.keys(data).forEach(kategori => {
+      const option = document.createElement("option");
+      option.value = kategori;
+      option.textContent = kategori.charAt(0).toUpperCase() + kategori.slice(1);
+      select.appendChild(option);
+    });
+  });
 
+function aturDiskon() {
+  const kategori = document.getElementById("kategoriSelect").value;
+  const diskon = parseInt(document.getElementById("diskonInput").value);
+
+  if (!kategori || isNaN(diskon)) {
+    Swal.fire("Lengkapi!", "Kategori dan diskon wajib diisi!", "warning");
+    return;
+  }
+
+  fetch('../sistem.php', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "atur-diskon",
+      kategori,
+      diskon
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      Swal.fire("Berhasil!", data.message, "success");
+    } else {
+      Swal.fire("Gagal", data.message || "Terjadi kesalahan.", "error");
+    }
+  })
+  .catch(err => {
+    Swal.fire("Error", err.message, "error");
+  });
+}
+
+function resetDiskon() {
+  Swal.fire({
+    title: "Yakin reset semua diskon?",
+    text: "Semua kategori akan kembali ke 0%",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Ya, Reset"
+  }).then(result => {
+    if (result.isConfirmed) {
+      fetch('../sistem.php', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "reset-diskon"
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire("Berhasil!", data.message, "success");
+        } else {
+          Swal.fire("Gagal", data.message || "Terjadi kesalahan.", "error");
+        }
+      })
+      .catch(err => {
+        Swal.fire("Error", err.message, "error");
+      });
+    }
+  });
+}
 function kirimVerifikasiTertunda() {
   fetch('auto-verifikasi.php')
     .then(res => res.json())
@@ -741,9 +912,41 @@ fetch('../sistem.php', {
 .catch(() => {
   document.getElementById('user-aktif').textContent = 'Gagal';
 });
+fetch('pendapatan.php', {
+  method: 'POST',
+  body: new URLSearchParams({ action: 'cek-total-pendapatan' })
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    document.getElementById('total-pendapatan').textContent = 
+      `Rp${data.bersih.toLocaleString('id-ID')}`;
+  } else {
+    document.getElementById('total-pendapatan').textContent = 'Error';
+  }
+})
+.catch(() => {
+  document.getElementById('total-pendapatan').textContent = 'Gagal';
+});
+
+const sounds = [
+    '../assets/sound.mp3'
+  ];
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('autoSound');
+    if (audio) {
+      const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+      audio.querySelector('source').src = randomSound;
+      audio.load();
+      audio.volume = 1.0;
+      audio.play().catch(() => {
+        document.body.addEventListener('click', () => audio.play(), { once: true });
+      });
+    }
+  });
 
 kirimVerifikasiTertunda();
-
 setTimeout(() => {
   kompensasiLimit();
 }, 5000);
@@ -812,81 +1015,6 @@ setInterval(() => {
 
   chart.update();
 }, 5000);
-</script>
-</body>
-</html>
-
-<?php
-$dataFile = '../dashboard/data/image.json';
-$data = file_exists($dataFile) ? json_decode(file_get_contents($dataFile), true) : [];
-$image = $data['profil']['image'] ?? '../assets/default.jpg';
-?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>X-TOOLS SOSMED - Pengumuman Penutupan</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&family=Tilt+Neon&display=swap" rel="stylesheet"> 
-  <style>
-    body { font-family: 'Tilt Neon', sans-serif; }
-    .fade-in { opacity:0; transform:translateY(20px); transition:all .8s ease-in-out; }
-    .fade-in.show { opacity:1; transform:translateY(0); }
-    .animate-bounce-slow { animation: bounce 3s infinite; }
-    @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
-  </style>
-</head>
-<body class="bg-slate-950 text-white min-h-screen">
-
-<nav class="fixed z-50 top-0 left-0 right-0 flex items-center justify-between 
-            backdrop-blur-md bg-gray-900/80 border border-gray-700 
-            p-3 mx-auto rounded-2xl shadow-xl fade-in transition-all duration-500" 
-     style="margin: 8px;">
-  <div class="flex items-center flex-shrink-0 text-white">
-    <a href="#" class="ml-4 text-2xl font-extrabold text-white bg-gradient-to-r from-red-600 to-rose-500 
-              px-5 py-2 rounded-2xl shadow-md flex items-center gap-3">
-      <i class="fas fa-triangle-exclamation text-yellow-300 text-2xl animate-pulse"></i>
-      <span class="tracking-wide">X-TOOLS SOSMED</span>
-    </a>
-  </div>
-</nav>
-
-<section class="flex items-center justify-center px-4 pt-28 pb-12 fade-in">
-  <div class="bg-gray-900 rounded-2xl p-8 max-w-2xl w-full text-center shadow-xl border border-red-600/40">
-    <img src="https://velixs.com/storage/web/logo.svg" alt="X-TOOLS Logo" 
-         class="mx-auto w-20 h-20 object-cover rounded-md animate-bounce-slow mb-4">
-    <h1 class="text-3xl font-bold bg-gradient-to-r from-red-500 via-rose-500 to-red-400">
-      PENGUMUMAN PENTING
-    </h1>
-    <p class="text-gray-300 mt-4 leading-relaxed">
-      Dengan berat hati kami sampaikan bahwa <span class="text-red-400 font-semibold">X-TOOLS SOSMED</span> 
-      resmi <span class="font-bold text-red-500">BERHENTI BEROPERASI</span> mulai hari ini karena 
-      mengalami kerugian yang tidak dapat ditanggung.
-    </p>
-    <div class="bg-gray-800 mt-6 p-4 rounded-lg shadow-lg text-left">
-      <h2 class="text-lg font-semibold text-red-400 mb-2">Informasi untuk Pengguna:</h2>
-      <ul class="list-disc list-inside text-gray-400 text-sm leading-relaxed space-y-1">
-        <li>Seluruh layanan suntik sosial media sudah <span class="text-red-400">dihentikan sementara</span>.</li>
-        <li>Pesanan yang belum diproses otomatis dibatalkan.</li>
-        <li>Bagi pengguna dengan saldo tersisa, silakan hubungi admin untuk konfirmasi lebih lanjut.</li>
-      </ul>
-    </div>
-</section>
-
-<footer class="bg-gray-900 text-center text-gray-500 py-4 text-sm border-t border-gray-700">
-  &copy; 2025 X-TOOLS SOSMED. Seluruh layanan telah dihentikan.
-</footer>
-
-<script>
-  // Animasi fade-in
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
