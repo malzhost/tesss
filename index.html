@@ -1,697 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buat Pesanan</title>
+  <title>X-TOOLS SOSMED - Panel SMM Termurah</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>X-TOOLS SOSMED - Suntik Sosmed Gratis</title>
+<link rel="canonical" href="index.php">
+<link rel="shortcut icon" href="../assets/logo.png" type="image/png">
+<link rel="icon" href="../assets/logo.png" type="image/png">
+<meta name="description" content="X-TOOLS SOSMED — tools untuk bantu optimasi sosial media: layanan followers, likes, views, dan traffic. Praktis, cepat, dan aman untuk kebutuhan promosi.">
+<meta property="og:site_name" content="X-TOOLS SOSMED">
+<meta property="og:title" content="X-TOOLS SOSMED">
+<meta property="og:description" content="X-TOOLS SOSMED — tools untuk bantu optimasi sosial media: layanan followers, likes, views, dan traffic. Praktis, cepat, dan aman untuk kebutuhan promosi.">
+<meta property="og:url" content="index.php">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../assets/logo.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@xtools_sosmed">
+<meta name="twitter:title" content="X-TOOLS SOSMED">
+<meta name="twitter:description" content="X-TOOLS SOSMED — tools praktis untuk meningkatkan engagement di sosial media.">
+<meta name="twitter:image" content="../assets/logo.png">
+
+<!-- Misc (verification / theme) -->
+<meta name="theme-color" content="#0f172a">
+<meta name="msapplication-TileImage" content="../assets/logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="icon" href="/assets/profile_1757840946.jpg" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&family=Tilt+Neon&display=swap" rel="stylesheet"> 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&family=Tilt+Neon&display=swap" rel="stylesheet">
+<!-- Structured data (JSON-LD) - basic organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "X-TOOLS SOSMED",
+  "url": "https://amangxd.xyz",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://amangxd.xyz/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Helpful security headers (meta, not replacement for real HTTP headers) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:;">
   <style>
-  .select-custom {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.select-custom:focus {
-  border-color: #3b82f6; /* biru */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
-}
-
-.select-custom option {
-  background-color: #1e293b; /* slate-800 */
-  color: #f1f5f9; /* text-gray-100 */
-}
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-gray-800 via-gray-900 to-black min-h-screen flex flex-col items-center justify-start p-4" style="font-family: 'Tilt Neon', sans-serif;">
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    Swal.fire({
-      title: "Saldo Anda",
-      html: `
-        <div style="text-align:center; padding:15px;">
-          <div style="background: linear-gradient(135deg, #1e293b, #0f172a); 
-                      border: 1px solid #334155; 
-                      border-radius: 16px; 
-                      padding: 20px; 
-                      box-shadow: 0 6px 20px rgba(0,0,0,0.5); 
-                      position: relative; overflow: hidden;">
+<body class="bg-slate-900 text-white font-sans" style="font-family: 'Ramabhadra', sans-serif; font-family: 'Tilt Neon', sans-serif; user-select: none;">
 
-            <!-- Glow Effect -->
-            <div style="position:absolute; top:-40px; right:-40px; width:100px; height:100px; 
-                        background: radial-gradient(circle, rgba(0,255,204,0.3), transparent 70%); 
-                        border-radius:50%;"></div>
-
-            <div style="font-size:36px; margin-bottom:10px; animation:pulse 2s infinite;">
-              💰
-            </div>
-            <h3 style="color:#94a3b8; font-size:14px; margin-bottom:6px; letter-spacing:1px;">TOTAL SALDO</h3>
-
-            <p style="font-size:26px; font-weight:bold; color:#00ffcc; margin:8px 0; text-shadow:0 0 10px rgba(0,255,204,0.4);">
-              Rp 8.795            </p>
-
-            <div style="background:#1e293b; border-radius:12px; height:10px; margin:12px 0; overflow:hidden;">
-              <div style="width:87.95%; 
-                          height:100%; 
-                          background:linear-gradient(90deg, #00ffcc, #3b82f6); 
-                          border-radius:12px; 
-                          box-shadow:0 0 8px rgba(0,255,204,0.6);"></div>
-            </div>
-
-            <p style="font-size:13px; color:#cbd5e1; margin-top:10px; line-height:1.5;">
-              Saldo ini bisa digunakan untuk membeli layanan sosial media, 
-              melakukan <b>Top-Up</b>, atau <b>Withdraw</b> kapan pun Anda mau.  
-              Semakin aktif bertransaksi, semakin besar peluang mendapatkan bonus saldo!
-            </p>
-          </div>
-        </div>
-      `,
-      showCancelButton: true,
-      confirmButtonText: "Tutup",
-      cancelButtonText: "Topup Saldo",
-      background: "#0f172a",
-      color: "#e2e8f0",
-      confirmButtonColor: "#00cc99",
-      cancelButtonColor: "#3b82f6"
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = "../topup";
-      }
-    });
-  });
-
-  const style = document.createElement('style');
-  style.innerHTML = `
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-  `;
-  document.head.appendChild(style);
-</script>
-<nav class="fixed z-50 top-0 left-0 right-0 flex items-center justify-between 
-            backdrop-blur-md bg-gray-900/80 border border-gray-700 
-            p-3 mx-auto rounded-2xl shadow-xl fade-in transition-all duration-500" 
-     style="margin: 8px;">
-  <div class="flex items-center flex-shrink-0 text-white">
-    <a href="#" id="brand-text"
-       class="ml-4 text-2xl font-extrabold text-white bg-gradient-to-r from-indigo-600 to-blue-500 
-              hover:from-blue-600 hover:to-indigo-500 px-5 py-2 rounded-2xl shadow-md 
-              transition-all duration-300 flex items-center gap-3 hover:scale-105"
-       style="transform: rotate(-2deg); display: inline-block;">
-      <i class="fas fa-server text-cyan-300 text-2xl animate-pulse"></i>
-      <span id="brand-anim" class="tracking-wide">X-TOOLS SOSMED</span>
+  <header class="bg-slate-900 fixed w-full top-0 left-0 z-50 shadow-md border-b border-gray-800">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 py-4">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 text-2xl font-bold text-blue-400">
+      <img src="../assets/logo.png" alt="Logo X-TOOLS" class="w-10 h-10 object-contain">
+      <span class="text-white">X-TOOLS</span>
     </a>
-  </div>
-  <div class="block lg:hidden mr-3">
-    <button id="menu-toggle" 
-            class="px-4 py-2 border rounded-xl text-gray-200 border-gray-500 
-                   bg-gray-800/70 hover:bg-gray-700 hover:border-gray-300 
-                   hover:text-white shadow-md transition-all duration-300 hover:scale-105">
-      <i class="fas fa-bars text-lg"></i>
-    </button>
-  </div>
-</nav>
 
-<div id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-gray-900 shadow-2xl transform -translate-x-full transition-transform duration-300 z-[9999] flex flex-col">
+    <nav class="hidden md:flex items-center gap-8 text-gray-300 font-medium">
+      <a href="#" class="hover:text-blue-400 transition">Home</a>
+      <a href="#fitur" class="hover:text-blue-400 transition">Fitur</a>
+      <a href="#informask" class="hover:text-blue-400 transition">informasi</a>
+      <a href="#konrak" class="hover:text-blue-400 transition">Kontak</a>
+    </nav>
 
-<div onclick="window.location.href='../profile'" 
-     class="p-6 rounded-b-2xl shadow-lg flex-shrink-0 cursor-pointer transition bg-cover bg-center relative"
-     style="background-image: url('../assets/background.png');">
-  <div class="absolute inset-0 bg-black bg-opacity-50 rounded-b-2xl"></div>  
-  <div class="relative flex items-center gap-4">
-    <img src="/assets/profile_1757840946.jpg" alt="Profil" 
-         class="w-14 h-14 rounded-full shadow-md border-2 border-white">
-    <div>
-      <h2 class="text-xl font-bold text-white">free</h2>
-      <p class="text-gray-200 text-sm flex items-center gap-1">
-        <i class="fa-solid fa-wallet text-green-400"></i> 
-        <span>Rp 8.795</span>
-      </p>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="../login" class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition flex items-center gap-2">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </a>
+      <a href="../register" class="px-4 py-2 rounded-lg bg-blue-400 text-gray-900 font-semibold hover:bg-blue-500 transition flex items-center gap-2">
+        <i class="fa-solid fa-user-plus"></i> Register
+      </a>
     </div>
-  </div>
-  
-  <p class="mt-3 text-gray-300 text-xs relative">
-    Selamat datang kembali, semoga harimu menyenangkan!
-  </p>
-</div>
 
-  <div class="p-4 bg-gray-600 flex justify-between items-center shadow-md flex-shrink-0">
-    <h2 class="text-lg font-semibold text-white">Dashboard Menu</h2>
-    <button id="close-sidebar" class="text-white hover:text-red-300 text-2xl transition">
-      <i class="fas fa-times"></i>
+    <button id="mobileMenuBtn" class="md:hidden text-gray-300 text-2xl">
+      <i class="fa-solid fa-bars"></i>
     </button>
   </div>
 
-  <div class="flex-1 overflow-y-auto">
-    <nav class="p-6 space-y-4">
-       <a href="../" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <div class="relative">
-          <i class="fas fa-house text-white text-xl"></i>
-        </div>
-        <div>
-          <span class="text-white font-semibold">Home</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Kembali ke home</p>
-        </div>
-      </a>
-       <a href="../order" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <div class="relative">
-          <i class="fas fa-cart-shopping text-xl"></i>
-        </div>
-        <div>
-          <span class="text-white font-semibold">Order</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Membuat orderan sosmed anda</p>
-        </div>
-      </a>
-      <a href="../history" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <div class="relative">
-          <i class="fas fa-history text-white text-xl"></i>
-          <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">3</span>
-        </div>
-        <div>
-          <span class="text-white font-semibold">History</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Lihat riwayat transaksi Anda</p>
-        </div>
-      </a>
-      <a href="../topup" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fa-solid fa-credit-card text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold">TopUp</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Topup limit akun anda</p>
-        </div>
-      </a>
-      <a href="../withdraw" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fa-solid fa-wallet text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold">Withdraw</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Tarik saldo tools menjadi saldo ewallet</p>
-        </div>
-      </a>
-       <a href="../status" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fa-solid fa-clipboard-list text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold">Status Order</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Check status orderan sosmed</p>
-        </div>
-      </a>    
-      <a href="../redem" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fa-solid fa-gift text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold">Redem Voucher</span>
-          <p class="text-gray-400 text-xs group-hover:text-gray-200">Dapatkan limit gratis</p>
-        </div>
-      </a>
-      <a href="../informasi" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-yellow-500 hover:text-black transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fas fa-circle-info text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold group-hover:text-black">Informasi</span>
-          <p class="text-gray-400 text-xs group-hover:text-black">Informasi tentang tools</p>
-        </div>
-      </a>
-      <a href="../tutorial" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-gray-700 hover:text-black transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fas fa-circle-question text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold group-hover:text-black">Tutorial</span>
-          <p class="text-gray-400 text-xs group-hover:text-black">Tutorial penggunaan tools</p>
-        </div>
-      </a>
-      <a href="../owner.html" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-yellow-500 hover:text-black transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fas fa-user-alt text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold group-hover:text-black">Owner</span>
-          <p class="text-gray-400 text-xs group-hover:text-black">Informasi pemilik aplikasi</p>
-        </div>
-      </a>
-      <a href="../assets/logout.php" class="group flex items-center gap-4 py-3 px-4 rounded-lg bg-gray-800 hover:bg-red-500 hover:text-black transition transform hover:scale-[1.02] border border-gray-700">
-        <i class="fas fa-sign-out-alt text-white text-xl"></i>
-        <div>
-          <span class="text-white font-semibold group-hover:text-black">Logout</span>
-          <p class="text-gray-400 text-xs group-hover:text-black">Keluar dari akun Anda</p>
-        </div>
-      </a>
-
-      <div class="grid grid-cols-3 gap-2 mt-8 text-center text-xs">
-        <div>
-          <i class="fas fa-bolt text-yellow-400 text-lg"></i>
-          <p class="text-gray-400 mt-1">Cepat</p>
-        </div>
-        <div>
-          <i class="fas fa-shield-alt text-green-400 text-lg"></i>
-          <p class="text-gray-400 mt-1">Aman</p>
-        </div>
-        <div>
-          <i class="fas fa-check-circle text-blue-400 text-lg"></i>
-          <p class="text-gray-400 mt-1">Terverifikasi</p>
-        </div>
-      </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-slate-800 border-t border-gray-700">
+    <nav class="flex flex-col px-6 py-4 space-y-3 text-gray-300 font-medium">
+      <a href="index.php" class="hover:text-blue-400 transition">Home</a>
+      <a href="#fitur" class="hover:text-blue-400 transition">Fitur</a>
+      <a href="store.php" class="hover:text-blue-400 transition">Store</a>
+      <a href="kontak.php" class="hover:text-blue-400 transition">Kontak</a>
+      <a href="login.php" class="hover:text-blue-400 transition">Login</a>
+      <a href="register.php" class="hover:text-blue-400 transition">Register</a>
     </nav>
   </div>
+</header>
 
-  <div class="flex-shrink-0 p-4 text-center text-gray-500 text-xs border-t border-gray-700">
-    © 2025 xtools. All Rights Reserved.
-  </div>
+<script>
+  document.getElementById("mobileMenuBtn").addEventListener("click", function(){
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  });
+</script>
+<section class="relative flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-28">
+    <div class="max-w-xl">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        X-TOOLS SOSMED  
+        <span class="text-blue-400">Panel SMM</span>  
+        Termurah & Terpercaya
+      </h1>
+      <p class="text-gray-300 text-lg leading-relaxed mb-6">
+        Tingkatkan engagement sosial media kamu dengan mudah!  
+        X-TOOLS SOSMED menyediakan layanan <b>followers, like, views, subscriber, hingga fitur withdraw saldo</b> yang aman, cepat, dan terpercaya.
+      </p>
+      <div class="flex space-x-4">
+        <a href="../login" class="flex items-center gap-2 px-6 py-3 bg-blue-400 text-gray-900 font-semibold rounded-lg shadow hover:bg-blue-500 transition">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </a>
+        <a href="../register" class="flex items-center gap-2 px-6 py-3 bg-gray-700 text-white font-semibold rounded-lg shadow hover:bg-gray-600 transition">
+          <i class="fa-solid fa-user-plus"></i> Register
+        </a>
+      </div>
+    </div>
+    <div class="mt-10 md:mt-0">
+      <img src="../assets/landingpage.png" 
+           alt="X-TOOLS SOSMED" 
+           class="w-full max-w-md animate-float drop-shadow-lg">
+    </div>
+  </section>
+<div class="relative">
+  <svg class="absolute bottom-0 w-full h-24 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+
+    <path fill="currentColor" fill-opacity="1">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite" values="
+        M0,160L80,176C160,192,320,224,480,224C640,224,800,192,960,181.3C1120,171,1280,181,1360,186.7L1440,192L1440,320L0,320Z;
+        M0,128L80,133.3C160,139,320,149,480,170.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160L1440,320L0,320Z;
+        M0,160L80,176C160,192,320,224,480,224C640,224,800,192,960,181.3C1120,171,1280,181,1360,186.7L1440,192L1440,320L0,320Z
+      " />
+    </path>
+
+    <path fill="currentColor" fill-opacity="0.5">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,192L60,186.7C120,181,240,171,360,170.7C480,171,600,181,720,186.7C840,192,960,192,1080,186.7C1200,181,1320,171,1380,165.3L1440,160L1440,320L0,320Z;
+        M0,160L80,170.7C160,181,320,203,480,213.3C640,224,800,224,960,213.3C1120,203,1280,181,1360,170.7L1440,160L1440,320L0,320Z;
+        M0,192L60,186.7C120,181,240,171,360,170.7C480,171,600,181,720,186.7C840,192,960,192,1080,186.7C1200,181,1320,171,1380,165.3L1440,160L1440,320L0,320Z
+      " />
+    </path>
+
+    <path fill="currentColor" fill-opacity="0.3">
+      <animate attributeName="d" dur="16s" repeatCount="indefinite" values="
+        M0,224L100,213.3C200,203,400,181,600,170.7C800,160,1000,160,1200,170.7C1400,181,1600,203,1800,213.3L2000,224L2000,320L0,320Z;
+        M0,192L120,197.3C240,203,480,213,720,208C960,203,1200,181,1320,170.7C1440,160,1520,160,1600,165.3L1680,170.7L1680,320L0,320Z;
+        M0,224L100,213.3C200,203,400,181,600,170.7C800,160,1000,160,1200,170.7C1400,181,1600,203,1800,213.3L2000,224L2000,320L0,320Z
+      " />
+    </path>
+
+  </svg>
 </div>
 
-<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
-<div class="mt-24 w-full max-w-md mx-auto bg-slate-900 rounded-xl shadow-2xl overflow-hidden border border-slate-800">
-  <div class="bg-gradient-to-r from-indigo-600 to-blue-600 p-4 flex items-center justify-center">
-    <h2 class="text-2xl font-bold text-white flex items-center">
-      <i class="fa-solid fa-cart-plus mr-2"></i> Buat Pesanan
-    </h2>
+<section class="bg-white py-20 px-8 md:px-20 text-center relative z-10">
+  <h2 class="text-3xl font-bold mb-8 text-gray-900">Statistik Pengguna Kami</h2>
+  <p class="text-gray-600 max-w-2xl mx-auto mb-12">
+    Ribuan pengguna telah mempercayakan kebutuhan sosial media mereka ke <span class="font-semibold text-blue-500">X-TOOLS SOSMED</span>.  
+    Berikut adalah pencapaian yang terus bertambah setiap harinya:
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <i class="fa-solid fa-users text-3xl text-blue-500 mb-3"></i>
+      <h3 class="text-2xl font-bold text-gray-900">12,340+</h3>
+      <p class="text-gray-600">Pengguna Aktif</p>
+    </div>
+
+    <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <i class="fa-solid fa-bag-shopping text-3xl text-green-500 mb-3"></i>
+      <h3 class="text-2xl font-bold text-gray-900">89,765+</h3>
+      <p class="text-gray-600">Total Orderan</p>
+    </div>
+
+    <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <i class="fa-solid fa-star text-3xl text-yellow-500 mb-3"></i>
+      <h3 class="text-2xl font-bold text-gray-900">4.9/5</h3>
+      <p class="text-gray-600">Rating Kepuasan</p>
+    </div>
+
   </div>
-  <div class="p-6 space-y-3">
-    <div class="bg-slate-800 border border-slate-700 p-3 rounded-lg mb-3 text-gray-300 text-sm flex items-start">
-      <i class="fa-solid fa-circle-info text-blue-400 mt-1 mr-2"></i>
-      <p>
-        Silakan pilih kategori sosial media dan layanan yang tersedia sesuai kebutuhanmu. 
-        Masukkan link target serta jumlah pesanan untuk melanjutkan. 
-        Biaya akan otomatis dihitung berdasarkan jumlah yang kamu isi.
+</section>
+<section class="bg-gray-900 py-20 px-8 md:px-20 text-center">
+  <h2 class="text-3xl font-bold mb-8 text-gray-100">
+    Kenapa Harus <span class="text-blue-500">X-TOOLS SOSMED</span>Terbaik dan Termurah?
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+    
+    <div class="flex flex-col items-center">
+      <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 text-white mb-4">
+        <i class="fa-solid fa-heart text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-100 mb-2">Layanan Berkualitas</h3>
+      <p class="text-gray-200">
+        Kami menyediakan berbagai layanan terbaik dan berkualitas untuk menaikkan peringkat social media Anda.
       </p>
     </div>
-    <div id="orderResult" class="mt-4"></div>
 
-<label class="block text-gray-200 text-sm mb-3">
-  <i class="fa-solid fa-list mr-1 text-blue-400"></i> Kategori
-</label>
-
-<div id="kategoriBtns" class="grid grid-cols-4 sm:grid-cols-6 gap-2">
-  <button data-value="instagram" class="kategori-btn bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-instagram text-lg mb-1"></i>
-    <span class="text-[10px]">Instagram</span>
-  </button>
-  <button data-value="instagramfollowers" class="kategori-btn bg-pink-400/20 hover:bg-pink-400/30 text-pink-300 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fa-solid fa-user-plus text-lg mb-1"></i>
-    <span class="text-[10px]">IG Follower</span>
-  </button>
-  <button data-value="facebook" class="kategori-btn bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-facebook text-lg mb-1"></i>
-    <span class="text-[10px]">Facebook</span>
-  </button>
-  <button data-value="youtube" class="kategori-btn bg-red-500/20 hover:bg-red-500/30 text-red-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-youtube text-lg mb-1"></i>
-    <span class="text-[10px]">YouTube</span>
-  </button>
-  <button data-value="twitter" class="kategori-btn bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-twitter text-lg mb-1"></i>
-    <span class="text-[10px]">Twitter</span>
-  </button>
-  <button data-value="spotify" class="kategori-btn bg-green-500/20 hover:bg-green-500/30 text-green-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-spotify text-lg mb-1"></i>
-    <span class="text-[10px]">Spotify</span>
-  </button>
-  <button data-value="tiktok" class="kategori-btn bg-gray-600/30 hover:bg-gray-600/50 text-white p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-tiktok text-lg mb-1"></i>
-    <span class="text-[10px]">TikTok</span>
-  </button>
-  <button data-value="linkedin" class="kategori-btn bg-blue-700/20 hover:bg-blue-700/30 text-blue-500 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-linkedin text-lg mb-1"></i>
-    <span class="text-[10px]">LinkedIn</span>
-  </button>
-  <button data-value="telegram" class="kategori-btn bg-sky-400/20 hover:bg-sky-400/30 text-sky-300 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fab fa-telegram text-lg mb-1"></i>
-    <span class="text-[10px]">Telegram</span>
-  </button>
-  <button data-value="thread" class="kategori-btn bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fa-solid fa-comments text-lg mb-1"></i>
-    <span class="text-[10px]">Thread</span>
-  </button>
-  <button data-value="whatsapp" class="kategori-btn bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fa-brands fa-whatsapp text-lg mb-1"></i>
-    <span class="text-[10px]">WhatsApp</span>
-  </button>
-  <button data-value="lainnya" class="kategori-btn bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 p-2 rounded-md flex flex-col items-center transition">
-    <i class="fa-solid fa-ellipsis text-lg mb-1"></i>
-    <span class="text-[10px]">Lainnya</span>
-  </button>
-</div>
-
-<label class="block text-gray-200 text-sm mb-1 mt-4">
-  <i class="fa-solid fa-cogs mr-1 text-green-400"></i>Layanan
-</label>
-<select id="layanan" 
-  class="w-full p-3 rounded-lg border border-slate-700 bg-slate-800 text-gray-100 placeholder-gray-500 focus:ring focus:ring-blue-500">
-  <option value="">Pilih kategori dulu...</option>
-</select>
-
-    <div id="deskripsi" 
-  class="w-full p-3 rounded-lg border border-slate-700 bg-slate-800 text-gray-100 
-         placeholder-gray-500 focus:ring focus:ring-blue-500 text-sm leading-relaxed">
-  Deskripsi layanan akan muncul di sini...
-</div>
-
-    <label class="block text-gray-200 text-sm mb-1"><i class="fa-solid fa-link mr-1 text-indigo-400"></i>Link/Target</label>
-    <input id="link" type="text" placeholder="Masukkan link profil/@username"
-      class="w-full p-3 rounded-lg border border-slate-700 bg-slate-800 text-gray-100 placeholder-gray-500 focus:ring focus:ring-blue-500">
-
-    <label class="block text-gray-200 text-sm mb-1">
-  <i class="fa-solid fa-hashtag mr-1 text-pink-400"></i>Jumlah 
-  <span id="rangeInfo" class="text-xs text-gray-500">(Min: 0 | Max: 0)</span>
-</label>
-<input id="jumlah" type="number" value="10"
-  class="w-full p-3 rounded-lg border border-slate-700 bg-slate-800 text-gray-100 focus:ring focus:ring-blue-500">
-
-    <label class="block text-gray-200 text-sm mb-1"><i class="fa-solid fa-money-bill-wave mr-1 text-green-400"></i>Biaya</label>
-    <div class="flex items-center mb-4">
-      <span class="bg-slate-800 px-3 py-3 rounded-l-lg border border-r-0 border-slate-700 text-gray-300">Rp</span>
-      <input id="biaya" type="text" readonly value="0"
-        class="w-full p-3 rounded-r-lg border border-slate-700 bg-slate-800 text-gray-100">
+    <div class="flex flex-col items-center">
+      <div class="w-16 h-16 flex items-center justify-center rounded-full bg-green-500 text-white mb-4">
+        <i class="fa-solid fa-headset text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-100 mb-2">Pelayanan Bantuan</h3>
+      <p class="text-gray-200">
+        Kami siap membantu Anda jika mengalami kesulitan atau tidak mengerti terkait layanan yang kami sediakan.
+      </p>
     </div>
 
-    <button onclick="pesanSekarang()"
-      class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white py-3 rounded-lg font-semibold transition shadow-md">
-      <i class="fa-solid fa-paper-plane mr-2"></i>Pesan Sekarang
+    <div class="flex flex-col items-center">
+      <div class="w-16 h-16 flex items-center justify-center rounded-full bg-yellow-500 text-white mb-4">
+        <i class="fa-solid fa-mobile-screen text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-100 mb-2">Desain Clean & Responsive</h3>
+      <p class="text-gray-200">
+        Website kami dapat diakses melalui berbagai perangkat baik PC, tablet, maupun smartphone dengan tampilan modern & responsif.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section class="bg-white py-20 px-8 md:px-20 text-center">
+  <h2 class="text-3xl font-bold mb-12 text-gray-900">Apa Kata Mereka?</h2>
+  
+  <div class="relative max-w-3xl mx-auto">
+    <div id="testimonialWrapper" class="overflow-hidden relative">
+      <div id="testimonialSlides" class="flex transition-transform duration-700">
+        
+        <div class="w-full flex-shrink-0 px-6">
+          <div class="bg-gray-100 p-8 rounded-xl shadow">
+            <p class="text-gray-700 italic mb-6">
+              “X-TOOLS SOSMED luar biasa! Layanannya cepat, murah, dan sangat memuaskan. Akan order lagi!”
+            </p>
+            <div class="flex items-center justify-center gap-3">
+              <img src="https://i.pravatar.cc/60?img=1" class="w-12 h-12 rounded-full" alt="User">
+              <div class="text-left">
+                <h4 class="font-bold text-gray-900">Bayu Fahri</h4>
+                <p class="text-gray-600 text-sm">Reseller Sosmed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-full flex-shrink-0 px-6">
+          <div class="bg-gray-100 p-8 rounded-xl shadow">
+            <p class="text-gray-700 italic mb-6">
+              “Pelayanan admin ramah banget. Harga termurah tapi kualitasnya gak kalah. Recommended!”
+            </p>
+            <div class="flex items-center justify-center gap-3">
+              <img src="https://i.pravatar.cc/60?img=2" class="w-12 h-12 rounded-full" alt="User">
+              <div class="text-left">
+                <h4 class="font-bold text-gray-900">Siti Rahma</h4>
+                <p class="text-gray-600 text-sm">Content Creator</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-full flex-shrink-0 px-6">
+          <div class="bg-gray-100 p-8 rounded-xl shadow">
+            <p class="text-gray-700 italic mb-6">
+              “Order banyak tapi selalu diproses cepat. Website juga gampang dipakai.”
+            </p>
+            <div class="flex items-center justify-center gap-3">
+              <img src="https://i.pravatar.cc/60?img=3" class="w-12 h-12 rounded-full" alt="User">
+              <div class="text-left">
+                <h4 class="font-bold text-gray-900">Andi Saputra</h4>
+                <p class="text-gray-600 text-sm">Digital Marketer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button id="prevBtn" class="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full p-3 shadow">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button id="nextBtn" class="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full p-3 shadow">
+      <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>
-</div>
-<div class="mt-8 w-full max-w-md mx-auto bg-slate-900 rounded-xl shadow-2xl overflow-hidden border border-slate-800">
-  <div class="bg-indigo-600 p-4 flex items-center justify-between cursor-pointer"
-       onclick="toggleInfo()">
-    <h2 class="text-xl font-bold text-white flex items-center">
-      <i class="fa-solid fa-circle-info mr-2"></i> Informasi Penting Instagram
-    </h2>
-    <i id="arrowIcon" class="fa-solid fa-chevron-down text-white transition-transform duration-300"></i>
-  </div>
-
-  <div id="infoContent" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-    <div class="p-6 text-gray-300 text-sm leading-relaxed space-y-3">
-      <p><b>Khusus pesan layanan Instagram tolong baca ini!</b></p>
-
-      <p><span class="text-red-400 font-semibold">Penting Instagram:</span>  
-      Jika Anda tidak melihat pengikut baru, kemungkinan besar karena mereka perlu disetujui secara manual. Untuk mengatasinya, ikuti langkah-langkah berikut untuk akun yang mau diisi followernya:</p>
-
-      <ol class="list-decimal pl-5 space-y-2">
-        <li>Buka <b>Pengaturan dan Privasi</b>.</li>
-        <li>Pilih <b>Ikuti dan Undang Teman</b>.</li>
-        <li>Nonaktifkan opsi <b>Tandai untuk Ditinjau</b>.</li>
-        <li>Jika baru saja menonaktifkan, coba test pesan sedikit dulu.</li>
-      </ol>
-
-      <p>
-        Dengan menonaktifkan fitur ini, pengikut baru akan diterima otomatis tanpa perlu persetujuan manual.  
-        <span class="text-yellow-400">Harap lakukan ini agar tidak terjadi kasus followers sukses tetapi tidak masuk karena tertahan di "spam".</span>
-      </p>
-
-      <div class="mt-4">
-        <img src="https://deposit.pictures/media/images/6c/ce/96/6cce96a756054ec78057f45ab4279de7.jpg" alt="Panduan Instagram Flag for Review"
-             class="rounded-lg shadow-md border border-slate-700 w-full object-cover">
-        <p class="text-xs text-gray-400 mt-2 text-center">Contoh tampilan menu yang harus dinonaktifkan</p>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 <script>
-function toggleInfo() {
-  const content = document.getElementById("infoContent");
-  const arrow = document.getElementById("arrowIcon");
+  const slides = document.getElementById("testimonialSlides");
+  const totalSlides = slides.children.length;
+  let index = 0;
 
-  if (content.style.maxHeight && content.style.maxHeight !== "0px") {
-    content.style.maxHeight = "0px";
-    arrow.classList.remove("rotate-180");
-  } else {
-    content.style.maxHeight = content.scrollHeight + "px";
-    arrow.classList.add("rotate-180");
+  function showSlide(i) {
+    slides.style.transform = `translateX(-${i * 100}%)`;
   }
-}
-</script>
-<div class="mt-8 w-full max-w-md mx-auto bg-slate-900 rounded-xl shadow-2xl overflow-hidden border border-slate-800">
-  <div class="bg-purple-600 p-4 flex items-center justify-center">
-    <h2 class="text-xl font-bold text-white flex items-center">
-      <i class="fa-solid fa-file-contract mr-2"></i> Peraturan & Kebijakan
-    </h2>
-  </div>
 
-  <div class="p-6 space-y-4 text-gray-300 text-sm leading-relaxed">
-    <p>
-      Dengan menggunakan layanan <b>X-TOOLS SOSMED</b>, berarti Anda telah membaca, memahami, dan menyetujui seluruh aturan berikut:
-    </p>
-
-    <ul class="list-disc pl-5 space-y-2">
-      <li>Pesanan yang sudah masuk <b>tidak dapat dibatalkan</b> atau dikembalikan.</li>
-      <li>Pastikan link/username target sudah benar sebelum melakukan pesanan.</li>
-      <li>Kami tidak bertanggung jawab atas kerugian akibat kesalahan input pengguna.</li>
-      <li>Hasil layanan dapat berbeda-beda tergantung aktivitas akun & algoritma sosial media.</li>
-      <li>Pelanggaran aturan dapat mengakibatkan <b>pembatasan akun</b> tanpa pengembalian saldo.</li>
-    </ul>
-
-    <p class="text-gray-400 text-xs italic">
-      *Peraturan dapat berubah sewaktu-waktu tanpa pemberitahuan terlebih dahulu.
-    </p>
-  </div>
-</div>
-
-<script>
-const layananSelect = document.getElementById("layanan");
-const deskripsiDiv = document.getElementById("deskripsi");
-const biayaInput = document.getElementById("biaya");
-const jumlahInput = document.getElementById("jumlah");
-const rangeInfo = document.getElementById("rangeInfo");
-
-let layananData = {};
-let selectedKategori = "";
-
-document.querySelectorAll(".kategori-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    selectedKategori = btn.dataset.value;
-
-    document.querySelectorAll(".kategori-btn").forEach(b => 
-      b.classList.remove("ring-2","ring-offset-2","ring-blue-500")
-    );
-    btn.classList.add("ring-2","ring-offset-2","ring-blue-500");
-
-    layananSelect.innerHTML = "<option value=''>Loading...</option>";
-    deskripsiDiv.innerHTML = `<i class="fa-solid fa-circle-info text-indigo-400 mr-2"></i> 
-                              <span>Deskripsi layanan akan muncul di sini...</span>`;
-    biayaInput.value = 0;
-
-    fetch("../layanan.php?action=" + selectedKategori)
-      .then(res => res.json())
-      .then(result => {
-        layananSelect.innerHTML = "<option value=''>Pilih layanan...</option>";
-        if (result.status && result.data) {
-          layananData = result.data;
-          for (const id in layananData) {
-            const opt = document.createElement("option");
-            opt.value = id;
-            opt.textContent = layananData[id].nama;
-            layananSelect.appendChild(opt);
-          }
-        } else {
-          layananSelect.innerHTML = "<option value=''>Tidak ada layanan</option>";
-        }
-      })
-      .catch(err => {
-        layananSelect.innerHTML = "<option value=''>Error load</option>";
-        console.error("Gagal load data layanan:", err);
-      });
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    index = (index + 1) % totalSlides;
+    showSlide(index);
   });
-});
 
-layananSelect.addEventListener("change", () => {
-  const layanan = layananSelect.value;
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    index = (index - 1 + totalSlides) % totalSlides;
+    showSlide(index);
+  });
 
-  if (layanan && layananData[layanan]) {
-    const data = layananData[layanan];
-
-    deskripsiDiv.innerHTML = `
-      <div class="flex flex-col gap-2">
-        <div>
-          <i class="fa-solid fa-circle-info text-indigo-400 mr-2"></i>
-          <strong>Deskripsi Layanan:</strong> 
-          <span>${data.deskripsi || "Tidak ada deskripsi"}</span>
-        </div>
-        ${data.average_time 
-          ? `<div class="text-sm text-gray-400 mt-1">
-               <i class="fa-solid fa-clock text-yellow-400 mr-1"></i>
-               <strong>Waktu Rata-Rata:</strong> ${data.average_time}
-             </div>` 
-          : ""}
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    showSlide(index);
+  }, 5000);
+</script>
+  <section id="fitur" class="bg-gray-900 py-16 px-8 md:px-20 text-center">
+    <h2 class="text-3xl font-bold mb-8">Kenapa Pilih X-TOOLS SOSMED?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-gray-700 p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold text-blue-400 mb-2">Harga Termurah</h3>
+        <p class="text-gray-300">Dapatkan harga layanan sosmed terbaik & termurah tanpa mengurangi kualitas.</p>
       </div>
-    `;
-
-    jumlahInput.min = data.min;
-    jumlahInput.max = data.max;
-    jumlahInput.value = data.min;
-    rangeInfo.textContent = `(Min: ${data.min} | Max: ${data.max})`;
-
-    hitungBiaya();
-  } else {
-    deskripsiDiv.innerHTML = `<i class="fa-solid fa-circle-info text-indigo-400 mr-2"></i> 
-                              <strong>Deskripsi Layanan:</strong> 
-                              <span>Deskripsi layanan akan muncul di sini...</span>`;
-    biayaInput.value = 0;
-    biayaInput.dataset.raw = 0;
-    jumlahInput.min = 0;
-    jumlahInput.max = 0;
-    rangeInfo.textContent = `(Min: 0 | Max: 0)`;
-  }
-});
-jumlahInput.addEventListener("input", hitungBiaya);
-
-function hitungBiaya() {
-  const jumlah = parseInt(jumlahInput.value) || 0;
-  const layanan = layananSelect.value;
-
-  if (layanan && layananData[layanan]) {
-    const hargaPerUnit = layananData[layanan].harga;
-    const total = jumlah * hargaPerUnit;
-
-    biayaInput.value = total.toLocaleString("id-ID");
-    biayaInput.dataset.raw = total;
-  } else {
-    biayaInput.value = 0;
-    biayaInput.dataset.raw = 0;
-  }
-}
-function pesanSekarang() {
-  const kategori = document.querySelector(".kategori-btn.ring-2")?.dataset.value || "";
-  const layanan  = layananSelect.value;
-  const link     = document.getElementById("link").value;
-  const jumlah   = jumlahInput.value;
-  const biaya    = biayaInput.dataset.raw || 0;
-
-  if (!kategori || !layanan || !link || jumlah <= 0) {
-    Swal.fire("Oops!", "Lengkapi semua data dulu ya.", "warning");
-    return;
-  }
-
-  Swal.fire({
-    title: "Konfirmasi Pesanan",
-    html: `
-      <div class="mx-auto p-4 mt-6">
-  <!-- Card Detail Pesanan -->
-  <div class="bg-gray-800 bg-opacity-80 rounded-lg shadow-md p-4">
-    <h2 class="text-lg font-semibold mb-4 text-center text-cyan-400 flex items-center justify-center gap-2">
-      <i class="fa-solid fa-clipboard-list"></i> Detail Pesanan
-    </h2>
-
-    <div class="space-y-2 text-sm">
-      <div class="flex justify-between border-b border-slate-700 pb-2">
-        <span class="text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-layer-group text-cyan-400"></i> Kategori
-        </span>
-        <p class="text-white font-medium">${kategori}</p>
+      <div class="bg-gray-700 p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold text-blue-400 mb-2">Transaksi Instan</h3>
+        <p class="text-gray-300">Proses order cepat & otomatis, semua layanan diproses hanya dalam hitungan detik.</p>
       </div>
-
-      <div class="flex justify-between border-b border-slate-700 pb-2">
-        <span class="text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-cogs text-green-400"></i> Layanan
-        </span>
-        <p class="text-white font-medium">${layananData[layanan].nama}</p>
-      </div>
-
-      <div class="flex justify-between border-b border-slate-700 pb-2">
-        <span class="text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-link text-blue-400"></i> Link
-        </span>
-        <p class="text-white font-medium break-all text-right">${link}</p>
-      </div>
-
-      <div class="flex justify-between border-b border-slate-700 pb-2">
-        <span class="text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-sort-numeric-up text-yellow-400"></i> Jumlah
-        </span>
-        <p class="text-white font-medium">${jumlah}</p>
-      </div>
-
-      <div class="flex justify-between">
-        <span class="text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-coins text-amber-400"></i> Biaya
-        </span>
-        <p class="text-green-400 font-bold text-lg">Rp ${parseInt(biaya).toLocaleString("id-ID")}</p>
+      <div class="bg-gray-700 p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold text-blue-400 mb-2">Fitur Withdraw</h3>
+        <p class="text-gray-300">Saldo tidak terpakai? Bisa langsung ditarik ke akun Dana atau rekening kamu.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <p class="text-gray-500 text-xs text-center mt-3">
-    Pastikan semua data sudah benar sebelum melanjutkan pesanan.
-  </p>
-</div>
-    `,
-    icon: "info",
-    showCancelButton: true,
-    confirmButtonText: "Pesan Sekarang",
-    cancelButtonText: "Batal",
-    background: "#0f172a",
-    color: "#e2e8f0",
-    confirmButtonColor: "#10b981",
-    cancelButtonColor: "#ef4444"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: 'Sedang memproses...',
-        text: 'Mohon tunggu sebentar.',
-        background: '#0f172a',
-        color: '#e2e8f0',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      });
+  <section class="py-16 px-8 md:px-20 text-center">
+    <h2 class="text-3xl font-bold mb-4">Gabung & Rasakan Kemudahannya!</h2>
+    <p class="text-gray-300 mb-6">Daftar sekarang juga di X-TOOLS SOSMED dan nikmati berbagai layanan SMM berkualitas.</p>
+    <a href="register.php" class="flex items-center justify-center gap-2 px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-lg shadow hover:bg-blue-500 transition w-max mx-auto">
+      <i class="fa-solid fa-user-plus"></i> Daftar Sekarang
+    </a>
+  </section>
 
-      fetch("../api.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-          service: layanan,
-          target: link,
-          quantity: jumlah,
-          amount: biaya
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status) {
-          const resultHTML = `
-              <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 border border-green-300" role="alert">
-                <span class="font-semibold">Hallo!</span> Pesanan berhasil dibuat:<br>
-                - ID Pesanan: ${data.data.id || '-'}<br>
-                - Layanan: ${layananData[layanan].nama}<br>
-                - Target: ${link}<br>
-                - Jumlah Pesan: ${jumlah}<br>
-                - Biaya: Rp ${parseInt(biaya).toLocaleString("id-ID")}
-              </div>
-            `;
-          document.getElementById("orderResult").innerHTML = resultHTML;
+  <footer class="text-center text-gray-500 text-sm py-6 border-t border-gray-800">
+    © 2025 X-TOOLS SOSMED - Semua Hak Dilindungi
+  </footer>
 
-          Swal.fire({
-            title: "Berhasil!",
-            text: data.msg,
-            icon: "success",
-            confirmButtonText: "OK"
-          });
-        } else {
-          Swal.fire("Gagal!", data.msg, "error");
-        }
-      })
-      .catch(err => {
-        Swal.fire("Error!", "Terjadi kesalahan: " + err, "error");
-      });
-    }
-  });
-}
-
-$('#menu-toggle').on('click', ()=>{ 
-  $('#sidebar').removeClass('-translate-x-full'); 
-  $('#overlay').show(); 
-});
-$('#close-sidebar, #overlay').on('click', ()=>{ 
-  $('#sidebar').addClass('-translate-x-full'); 
-  $('#overlay').hide(); 
-});
-</script>
 </body>
 </html>
